@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import type { Roster, RosterEntry } from "@/types";
 
-// RoyaleAPI community proxy — no IP whitelisting required, works from any server
-const BS_BASE = "https://bsproxy.royaleapi.dev/v1";
+// Use Railway proxy (fixed IP, no IP restriction issues) if configured, else official API
+const BS_BASE = process.env.BS_PROXY_URL
+  ? `${process.env.BS_PROXY_URL}/v1`
+  : "https://api.brawlstars.com/v1";
 
 interface BSGear {
   id: number;
@@ -44,19 +46,15 @@ export async function GET(req: NextRequest) {
 
   const encoded = encodeURIComponent(tag.startsWith("#") ? tag : `#${tag}`);
 
-  // Try RoyaleAPI proxy first (no auth header — proxy uses its own key)
-  let res = await fetch(`${BS_BASE}/players/${encoded}`, { cache: "no-store" });
-
-  // Fall back to official API with user key if proxy fails
-  if (!res.ok && res.status !== 404) {
+  const useProxy = !!process.env.BS_PROXY_URL;
+  const headers: Record<string, string> = {};
+  if (!useProxy) {
     const apiKey = process.env.BRAWLSTARS_API_KEY;
-    if (apiKey) {
-      res = await fetch(`https://api.brawlstars.com/v1/players/${encoded}`, {
-        headers: { Authorization: `Bearer ${apiKey}` },
-        cache: "no-store",
-      });
-    }
+    if (!apiKey) return NextResponse.json({ error: "API not configured" }, { status: 500 });
+    headers["Authorization"] = `Bearer ${apiKey}`;
   }
+
+  const res = await fetch(`${BS_BASE}/players/${encoded}`, { headers, cache: "no-store" });
 
   if (!res.ok) {
     const body = await res.text();
