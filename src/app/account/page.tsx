@@ -50,9 +50,7 @@ export default function AccountPage() {
       if (!res.ok) {
         setMsg({
           type: "error",
-          text: res.status === 403
-            ? "API blocked (403) — the Brawl Stars API only allows requests from your home IP. Run the app locally (npm run dev) to sync, then export your roster from the Roster page."
-            : `Error ${res.status}: ${data.error ?? "Import failed"}`,
+          text: `Error ${res.status}: ${data.error ?? "Import failed"} — ${JSON.stringify(data.detail ?? "")}`,
         });
         return;
       }
