@@ -39,16 +39,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${geist.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-gray-950 text-gray-100 font-sans">
-        <header className="border-b border-gray-800 bg-gray-900">
-          <nav className="max-w-6xl mx-auto px-4 h-14 flex items-center gap-6">
-            <Link href="/" className="text-yellow-400 font-bold text-lg tracking-tight">
+        <header className="border-b border-gray-700 relative overflow-hidden" style={{background: "linear-gradient(135deg, #1a0a3e 0%, #0e0820 60%, #0a1228 100%)"}}>
+          <div className="absolute inset-0 opacity-30" style={{backgroundImage: "radial-gradient(ellipse 60% 100% at 0% 50%, rgba(168,85,247,0.3) 0%, transparent 70%)"}} />
+          <nav className="max-w-6xl mx-auto px-4 h-14 flex items-center gap-6 relative">
+            <Link href="/" className="font-extrabold text-lg tracking-tight" style={{background: "linear-gradient(90deg, #fbbf24, #f97316)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent"}}>
               ⚡ Brawl Advisor
             </Link>
-            <Link href="/roster" className="text-gray-300 hover:text-white text-sm transition-colors">
-              My Roster
-            </Link>
-            <Link href="/draft" className="text-gray-300 hover:text-white text-sm transition-colors">
+            <Link href="/draft" className="text-gray-300 hover:text-yellow-400 text-sm font-medium transition-colors">
               Draft
+            </Link>
+            <Link href="/roster" className="text-gray-300 hover:text-yellow-400 text-sm font-medium transition-colors">
+              Roster
+            </Link>
+            <Link href="/account" className="ml-auto text-gray-300 hover:text-yellow-400 text-sm font-medium transition-colors">
+              Account
             </Link>
           </nav>
         </header>
