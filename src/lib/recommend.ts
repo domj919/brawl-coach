@@ -16,19 +16,34 @@ export function recommend(
   draft: DraftState,
   roster: Roster,
   allBrawlers: BrawlerBase[],
-  meta: MapMeta | null
+  meta: MapMeta | null,
+  freeBrawlerIds: Set<number> = new Set()
 ): Recommendation[] {
   const pickedIds = new Set([...draft.allyPicks, ...draft.enemyPicks, ...draft.bans]);
-  const ownedIds = Object.keys(roster).map(Number);
+  const ownedIds = new Set(Object.keys(roster).map(Number));
 
   const results: Recommendation[] = [];
 
   for (const brawler of allBrawlers) {
     const id = brawler.id;
-    if (!ownedIds.includes(id)) continue;
+    const isFree = freeBrawlerIds.has(id);
+    if (!ownedIds.has(id) && !isFree) continue;
     if (pickedIds.has(id)) continue;
 
-    const entry = roster[id];
+    // Free ranked brawlers are always at max power regardless of what player owns
+    const entry: import("@/types").RosterEntry = isFree
+      ? {
+          brawlerId: id,
+          powerLevel: 11,
+          gadgetsOwned: brawler.gadgets.map((g) => g.id),
+          starPowersOwned: brawler.starPowers.map((sp) => sp.id),
+          gearsOwned: [],
+          hasHypercharge: false,
+          hasGadgetBuffie: false,
+          hasStarBuffie: false,
+          hasHyperBuffie: false,
+        }
+      : roster[id];
     const reasons: string[] = [];
     const warnings: string[] = [];
     let score = 50;
@@ -81,10 +96,15 @@ export function recommend(
       }
     }
 
+    // ── Free ranked brawler ───────────────────────────────────────────────
+    if (isFree) {
+      reasons.push("Free ranked brawler this season — max power");
+    }
+
     // ── Roster quality ────────────────────────────────────────────────────
     if (entry.powerLevel >= 11) {
       score += 5;
-      reasons.push("Max power level");
+      if (!isFree) reasons.push("Max power level");
     } else if (entry.powerLevel < RECOMMENDED_POWER) {
       score -= 5;
       warnings.push(`Power level ${entry.powerLevel} — recommend upgrading to ${RECOMMENDED_POWER}+`);

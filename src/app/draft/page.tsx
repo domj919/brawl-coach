@@ -6,6 +6,7 @@ import type { BrawlerBase, DraftState, GameMap, Recommendation } from "@/types";
 import { useAppData } from "@/lib/useAppData";
 import { loadRoster } from "@/store/roster";
 import { resolveMapMeta } from "@/data/meta";
+import { RANKED_FREE_BRAWLER_NAMES, RANKED_SEASON_LABEL } from "@/data/rankedSeason";
 import { recommend } from "@/lib/recommend";
 import { getRoleWarnings } from "@/lib/roles";
 import { saveMatch, loadMatches, winRatesByBrawler } from "@/store/matches";
@@ -26,7 +27,7 @@ const RANKED_MODES = [
 type PickerTarget = "ally" | "enemy" | "ban";
 
 export default function DraftPage() {
-  const { brawlers, maps, loading, error } = useAppData();
+  const { brawlers, maps, rankedRotation, loading, error } = useAppData();
   const [roster, setRoster] = useState<Roster>({});
   const [draft, setDraft] = useState<DraftState>({ mapId: null, allyPicks: [], enemyPicks: [], bans: [] });
   const [modeFilter, setModeFilter] = useState<string>("");
@@ -42,12 +43,23 @@ export default function DraftPage() {
     setWinRates(winRatesByBrawler(loadMatches()));
   }, []);
 
-  const filteredMaps = useMemo(() => maps
-    .filter((m) => RANKED_MODES.includes(m.mode))
-    .filter((m) => !modeFilter || m.mode === modeFilter)
-    .filter((m) => m.name.toLowerCase().includes(mapSearch.toLowerCase())),
-    [maps, modeFilter, mapSearch]
-  );
+  const [showAllMaps, setShowAllMaps] = useState(false);
+
+  const freeBrawlerIds = useMemo(() => {
+    const nameSet = new Set(RANKED_FREE_BRAWLER_NAMES.map((n) => n.toLowerCase()));
+    return new Set(brawlers.filter((b) => nameSet.has(b.name.toLowerCase())).map((b) => b.id));
+  }, [brawlers]);
+
+  const rotationIds = useMemo(() => new Set(rankedRotation.map((m) => m.id)), [rankedRotation]);
+
+  const mapPool = useMemo(() => {
+    const base = (rankedRotation.length > 0 && !showAllMaps)
+      ? rankedRotation
+      : maps.filter((m) => RANKED_MODES.includes(m.mode));
+    return base
+      .filter((m) => !modeFilter || m.mode === modeFilter)
+      .filter((m) => m.name.toLowerCase().includes(mapSearch.toLowerCase()));
+  }, [maps, rankedRotation, showAllMaps, modeFilter, mapSearch]);
 
   const selectedMap = maps.find((m) => m.id === draft.mapId) ?? null;
 
@@ -60,8 +72,8 @@ export default function DraftPage() {
 
   const recommendations: Recommendation[] = useMemo(() => {
     if (!draft.mapId) return [];
-    return recommend(draft, roster, brawlers, meta);
-  }, [draft, roster, brawlers, meta]);
+    return recommend(draft, roster, brawlers, meta, freeBrawlerIds);
+  }, [draft, roster, brawlers, meta, freeBrawlerIds]);
 
   const roleWarnings = useMemo(() =>
     getRoleWarnings(draft.allyPicks, brawlers, selectedMap?.mode as never),
@@ -134,10 +146,38 @@ export default function DraftPage() {
 
       {/* Step 1: map */}
       <section className="mb-6">
-        <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">1 · Select Map</h2>
+        <div className="flex items-center justify-between mb-2">
+          <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wide">1 · Select Map</h2>
+          {rankedRotation.length > 0 && (
+            <button onClick={() => setShowAllMaps((v) => !v)}
+              className="text-xs text-gray-400 hover:text-white underline underline-offset-2">
+              {showAllMaps ? "Show rotation only" : "Show all maps"}
+            </button>
+          )}
+        </div>
+
+        {/* Season free brawlers banner */}
+        {freeBrawlerIds.size > 0 && (
+          <div className="mb-3 flex flex-wrap items-center gap-2 px-3 py-2 rounded-xl bg-yellow-400/10 border border-yellow-400/20 text-xs text-yellow-300">
+            <span className="font-semibold">{RANKED_SEASON_LABEL} free brawlers:</span>
+            {brawlers.filter((b) => freeBrawlerIds.has(b.id)).map((b) => (
+              <span key={b.id} className="flex items-center gap-1 bg-yellow-400/10 border border-yellow-400/30 rounded-lg px-2 py-0.5">
+                <span className="relative w-5 h-5 shrink-0 inline-block">
+                  <Image src={b.imageUrl} alt={b.name} fill className="object-cover rounded" sizes="20px" unoptimized />
+                </span>
+                {b.name}
+              </span>
+            ))}
+            <span className="text-yellow-400/60 ml-auto">★★★ max power</span>
+          </div>
+        )}
+
+        {rankedRotation.length > 0 && !showAllMaps && (
+          <p className="text-xs text-gray-500 mb-2">Showing {rankedRotation.length} maps in today&apos;s rotation</p>
+        )}
+
         <div className="flex gap-1.5 flex-wrap mb-2">
-          <button
-            onClick={() => setModeFilter("")}
+          <button onClick={() => setModeFilter("")}
             className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${!modeFilter ? "bg-yellow-400 text-gray-950 border-yellow-400" : "border-gray-700 text-gray-400 hover:border-gray-500"}`}
           >All</button>
           {RANKED_MODES.map((m) => (
@@ -149,9 +189,9 @@ export default function DraftPage() {
         <input type="text" placeholder="Search maps…" value={mapSearch} onChange={(e) => setMapSearch(e.target.value)}
           className="w-full mb-2 bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400" />
         <div className="flex gap-2 overflow-x-auto pb-2">
-          {filteredMaps.map((map: GameMap) => (
+          {mapPool.map((map: GameMap) => (
             <button key={map.id} onClick={() => setDraft((d) => ({ ...d, mapId: map.id }))}
-              className={`shrink-0 rounded-xl overflow-hidden border-2 transition-all w-24 sm:w-28 ${draft.mapId === map.id ? "border-yellow-400" : "border-gray-700 hover:border-gray-500"}`}
+              className={`shrink-0 rounded-xl overflow-hidden border-2 transition-all w-24 sm:w-28 ${draft.mapId === map.id ? "border-yellow-400" : rotationIds.has(map.id) ? "border-blue-500/60 hover:border-blue-400" : "border-gray-700 hover:border-gray-500"}`}
             >
               <div className="relative h-16 sm:h-20 w-full bg-gray-800">
                 <Image src={map.imageUrl} alt={map.name} fill className="object-cover" sizes="112px" unoptimized />

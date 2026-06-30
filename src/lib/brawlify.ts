@@ -57,3 +57,30 @@ export async function fetchMaps(): Promise<GameMap[]> {
       environment: m.environment.name,
     }));
 }
+
+const RANKED_MODES_SET = new Set([
+  "Gem Grab", "Brawl Ball", "Heist", "Bounty", "Hot Zone", "Knockout", "Wipeout",
+]);
+
+interface BrawlifyActiveEvent {
+  startTime: string;
+  endTime: string;
+  slotId: number;
+  map: BrawlifyMap;
+}
+
+export async function fetchRankedRotation(): Promise<GameMap[]> {
+  const res = await fetch(`${BASE}/events/active`, { next: { revalidate: 300 } });
+  if (!res.ok) throw new Error(`Brawlify events error: ${res.status}`);
+  const json = await res.json();
+  const events: BrawlifyActiveEvent[] = json.active ?? [];
+  return events
+    .filter((e) => e.map && !e.map.disabled && RANKED_MODES_SET.has(e.map.gameMode?.name))
+    .map((e) => ({
+      id: e.map.id,
+      name: e.map.name,
+      mode: e.map.gameMode.name as GameMode,
+      imageUrl: e.map.imageUrl,
+      environment: e.map.environment?.name ?? "",
+    }));
+}
