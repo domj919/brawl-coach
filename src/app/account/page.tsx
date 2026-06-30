@@ -82,41 +82,8 @@ export default function AccountPage() {
       <h1 className="text-2xl font-bold mb-1">Account</h1>
       <p className="text-gray-400 text-sm mb-8">Link your Brawl Stars tag so the advisor knows who you are.</p>
 
-      {/* Linked account card */}
-      {account?.playerTag && (
-        <div className="mb-6 rounded-2xl border border-gray-700 p-5" style={{background: "linear-gradient(135deg, #0f2040 0%, #162b4e 100%)"}}>
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl font-black shrink-0"
-              style={{background: "linear-gradient(135deg, #FFD700, #FF8C00)"}}>
-              {account.playerName ? account.playerName[0].toUpperCase() : "#"}
-            </div>
-            <div className="flex-1 min-w-0">
-              {account.playerName
-                ? <p className="font-bold text-white text-lg leading-tight">{account.playerName}</p>
-                : <p className="text-gray-400 text-sm italic">Name loads after sync</p>
-              }
-              <p className="font-mono text-yellow-400 text-sm">{account.playerTag}</p>
-              {account.lastSync > 0 && (
-                <p className="text-xs text-gray-500 mt-0.5">Last synced {new Date(account.lastSync).toLocaleString()}</p>
-              )}
-            </div>
-            <button onClick={handleSignOut}
-              className="text-xs px-3 py-1.5 rounded-lg bg-red-900/40 hover:bg-red-900/70 text-red-400 transition-colors">
-              Unlink
-            </button>
-          </div>
-
-          {/* Sync button */}
-          <button onClick={handleSync} disabled={syncing}
-            className="mt-4 w-full py-2.5 rounded-xl font-bold text-sm transition-all hover:opacity-90 disabled:opacity-50"
-            style={{background: "linear-gradient(135deg, #FFD700, #FF8C00)", color: "#060e1a"}}>
-            {syncing ? "Syncing roster…" : "Sync roster from Brawl Stars"}
-          </button>
-        </div>
-      )}
-
       {/* Tag input */}
-      <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5">
+      <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5 mb-6">
         <h2 className="font-semibold text-white mb-1">
           {account?.playerTag ? "Change tag" : "Link your Brawl Stars tag"}
         </h2>
@@ -152,6 +119,38 @@ export default function AccountPage() {
           </div>
         )}
       </div>
+
+      {/* Linked account card */}
+      {account?.playerTag && (
+        <div className="mb-6 rounded-2xl border border-gray-700 p-5" style={{background: "linear-gradient(135deg, #0f2040 0%, #162b4e 100%)"}}>
+          <div className="flex items-center gap-4">
+            <div className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl font-black shrink-0"
+              style={{background: "linear-gradient(135deg, #FFD700, #FF8C00)"}}>
+              {account.playerName ? account.playerName[0].toUpperCase() : "#"}
+            </div>
+            <div className="flex-1 min-w-0">
+              {account.playerName
+                ? <p className="font-bold text-white text-lg leading-tight">{account.playerName}</p>
+                : <p className="text-gray-400 text-sm italic">Name loads after sync</p>
+              }
+              <p className="font-mono text-yellow-400 text-sm">{account.playerTag}</p>
+              {account.lastSync > 0 && (
+                <p className="text-xs text-gray-500 mt-0.5">Last synced {new Date(account.lastSync).toLocaleString()}</p>
+              )}
+            </div>
+            <button onClick={handleSignOut}
+              className="text-xs px-3 py-1.5 rounded-lg bg-red-900/40 hover:bg-red-900/70 text-red-400 transition-colors">
+              Unlink
+            </button>
+          </div>
+
+          <button onClick={handleSync} disabled={syncing}
+            className="mt-4 w-full py-2.5 rounded-xl font-bold text-sm transition-all hover:opacity-90 disabled:opacity-50"
+            style={{background: "linear-gradient(135deg, #FFD700, #FF8C00)", color: "#060e1a"}}>
+            {syncing ? "Syncing roster…" : "Sync roster from Brawl Stars"}
+          </button>
+        </div>
+      )}
 
       {/* How to find tag */}
       <div className="mt-4 bg-gray-900/50 border border-gray-800 rounded-2xl p-4">
