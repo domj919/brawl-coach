@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import type { Roster, RosterEntry } from "@/types";
 
-const BS_BASE = "https://api.brawlstars.com/v1";
+// RoyaleAPI community proxy — no IP whitelisting required, works from any server
+const BS_BASE = "https://bsproxy.royaleapi.dev/v1";
 
 interface BSGear {
   id: number;
