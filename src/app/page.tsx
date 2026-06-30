@@ -8,7 +8,7 @@ export default function Home() {
         Season 51 meta · Updated June 2026
       </div>
       <h1 className="text-5xl sm:text-6xl font-extrabold mb-4 leading-tight"
-        style={{background: "linear-gradient(135deg, #fbbf24 0%, #f97316 50%, #a855f7 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent"}}>
+        style={{background: "linear-gradient(135deg, #FFD700 0%, #FFA500 60%, #FF6B00 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent"}}>
         Brawl Advisor
       </h1>
       <p className="text-gray-400 text-lg mb-10 max-w-xl mx-auto">

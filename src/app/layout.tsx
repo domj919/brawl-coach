@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import Link from "next/link";
+import Image from "next/image";
 import "./globals.css";
 
 const geist = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -39,19 +40,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${geist.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-gray-950 text-gray-100 font-sans">
-        <header className="border-b border-gray-700 relative overflow-hidden" style={{background: "linear-gradient(135deg, #1a0a3e 0%, #0e0820 60%, #0a1228 100%)"}}>
-          <div className="absolute inset-0 opacity-30" style={{backgroundImage: "radial-gradient(ellipse 60% 100% at 0% 50%, rgba(168,85,247,0.3) 0%, transparent 70%)"}} />
-          <nav className="max-w-6xl mx-auto px-4 h-14 flex items-center gap-6 relative">
-            <Link href="/" className="font-extrabold text-lg tracking-tight" style={{background: "linear-gradient(90deg, #fbbf24, #f97316)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent"}}>
-              ⚡ Brawl Advisor
+        <header className="border-b border-blue-900/60 relative overflow-hidden" style={{background: "linear-gradient(180deg, #0d1f3e 0%, #081428 100%)"}}>
+          <div className="absolute inset-0" style={{backgroundImage: "radial-gradient(ellipse 80% 100% at 50% 0%, rgba(30,90,200,0.2) 0%, transparent 70%)"}} />
+          <nav className="max-w-6xl mx-auto px-4 h-14 flex items-center gap-5 relative">
+            <Link href="/" className="flex items-center gap-2 shrink-0">
+              {/* Brawl Stars logo from Brawlify CDN */}
+              <Image
+                src="https://cdn.brawlify.com/assets/png/logo.png"
+                alt="Brawl Stars"
+                width={28}
+                height={28}
+                className="object-contain"
+                unoptimized
+                onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+              />
+              <span className="font-extrabold text-lg tracking-tight" style={{background: "linear-gradient(90deg, #FFD700, #FFA500)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent"}}>
+                Brawl Advisor
+              </span>
             </Link>
-            <Link href="/draft" className="text-gray-300 hover:text-yellow-400 text-sm font-medium transition-colors">
+            <Link href="/draft" className="text-blue-200 hover:text-yellow-400 text-sm font-medium transition-colors">
               Draft
             </Link>
-            <Link href="/roster" className="text-gray-300 hover:text-yellow-400 text-sm font-medium transition-colors">
+            <Link href="/roster" className="text-blue-200 hover:text-yellow-400 text-sm font-medium transition-colors">
               Roster
             </Link>
-            <Link href="/account" className="ml-auto text-gray-300 hover:text-yellow-400 text-sm font-medium transition-colors">
+            <Link href="/account" className="ml-auto text-blue-200 hover:text-yellow-400 text-sm font-medium transition-colors">
               Account
             </Link>
           </nav>
