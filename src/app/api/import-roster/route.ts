@@ -59,7 +59,7 @@ export async function GET(req: NextRequest) {
   if (!res.ok) {
     const body = await res.text();
     const detail = (() => { try { return JSON.parse(body); } catch { return body; } })();
-    return NextResponse.json({ error: `Brawl Stars API error ${res.status}`, detail }, { status: res.status });
+    return NextResponse.json({ error: `Brawl Stars API error ${res.status}`, detail, _target: BS_BASE }, { status: res.status });
   }
 
   const player: BSPlayer = await res.json();
