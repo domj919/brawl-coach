@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\domin\\\\OneDrive\\\\Documents\\\\brawl-advisor\\\\src\\\\types\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\domin\\\\OneDrive\\\\Documents\\\\brawl-advisor\\\\src\\\\data\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\domin\\\\OneDrive\\\\Documents\\\\brawl-advisor\\\\src\\\\lib\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\domin\\\\OneDrive\\\\Documents\\\\brawl-advisor\\\\src\\\\store\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\domin\\\\OneDrive\\\\Documents\\\\brawl-advisor\\\\src\\\\components\\\\ui\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\domin\\\\OneDrive\\\\Documents\\\\brawl-advisor\\\\src\\\\app\\\\api\\\\brawlers\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\domin\\\\OneDrive\\\\Documents\\\\brawl-advisor\\\\src\\\\app\\\\api\\\\maps\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\domin\\\\OneDrive\\\\Documents\\\\brawl-advisor\\\\src\\\\app\\\\roster\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\domin\\\\OneDrive\\\\Documents\\\\brawl-advisor\\\\src\\\\app\\\\draft\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\domin\\\\OneDrive\\\\Documents\\\\brawl-advisor\\\\src\\\\app\\\\api\\\\import-roster\")",
+      "WebSearch",
+      "WebFetch(domain:api.brawlapi.com)",
+      "WebFetch(domain:brawltime.ninja)",
+      "WebFetch(domain:www.noff.gg)",
+      "WebFetch(domain:grindnstrat.com)",
+      "WebFetch(domain:pinkcrow.net)",
+      "WebFetch(domain:www.brawlbrawl.com)",
+      "WebFetch(domain:brawl-tools.com)",
+      "WebFetch(domain:topbrawl.com)",
+      "WebFetch(domain:frvr.com)",
+      "WebFetch(domain:mmonster.co)",
+      "WebFetch(domain:brawlhub.co)",
+      "WebFetch(domain:zathong.com)",
+      "WebFetch(domain:clutchpoints.com)",
+      "WebFetch(domain:brawlvalue.com)",
+      "WebFetch(domain:timesaver.gg)",
+      "WebFetch(domain:tiermaker.com)",
+      "WebFetch(domain:brawlstars.fandom.com)"
+    ]
+  }
+}
