@@ -3,6 +3,10 @@
 @theme inline {
   --font-sans: var(--font-geist-sans);
 
+  /* Override Tailwind's bg/fg vars so base styles use our dark theme */
+  --color-background: #060e1a;
+  --color-foreground: #e8f0fa;
+
   /* Remap grays to Brawl Stars navy-blue palette (Season 51) */
   --color-gray-950: #060e1a;
   --color-gray-900: #0b1525;

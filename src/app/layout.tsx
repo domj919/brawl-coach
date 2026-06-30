@@ -47,11 +47,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {/* Brawl Stars logo from Brawlify CDN */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://cdn.brawlify.com/assets/png/logo.png"
+                src="/brawlstars-logo.svg"
                 alt="Brawl Stars"
-                width={28}
-                height={28}
-                className="object-contain"
+                width={32}
+                height={32}
+                className="object-contain drop-shadow-md"
               />
               <span className="font-extrabold text-lg tracking-tight" style={{background: "linear-gradient(90deg, #FFD700, #FFA500)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent"}}>
                 Brawl Advisor

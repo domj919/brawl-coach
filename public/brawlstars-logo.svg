@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Blue rounded background -->
+  <rect width="100" height="100" rx="22" fill="#1A4CB8"/>
+  <rect width="100" height="100" rx="22" fill="url(#bg-grad)"/>
+  <defs>
+    <radialGradient id="bg-grad" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#2D6BE4"/>
+      <stop offset="100%" stop-color="#0D2E8A"/>
+    </radialGradient>
+  </defs>
+  <!-- Gold star -->
+  <polygon
+    points="50,14 55.9,33.8 76.5,33.8 60.3,45.7 66.2,65.5 50,53.6 33.8,65.5 39.7,45.7 23.5,33.8 44.1,33.8"
+    fill="#FFD200"
+    stroke="#FF9900"
+    stroke-width="1.5"
+    stroke-linejoin="round"
+  />
+  <!-- Shine on star -->
+  <polygon
+    points="50,14 55.9,33.8 44.1,33.8"
+    fill="#FFE84D"
+    opacity="0.7"
+  />
+  <!-- "BS" text -->
+  <text x="50" y="88" text-anchor="middle" font-family="Arial Black, Arial" font-weight="900" font-size="18" fill="#FFD200" letter-spacing="1">BS</text>
+</svg>
