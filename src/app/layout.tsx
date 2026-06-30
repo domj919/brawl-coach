@@ -59,7 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Link>
             <Link href="/draft" className="flex items-center gap-1.5 text-blue-200 hover:text-yellow-400 text-sm font-medium transition-colors">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/ranked-logo.svg" alt="" width={20} height={20} className="opacity-90" />
+              <img src="/ranked-logo.png" alt="" width={28} height={28} className="object-contain" />
               Draft
             </Link>
             <Link href="/roster" className="text-blue-200 hover:text-yellow-400 text-sm font-medium transition-colors">
