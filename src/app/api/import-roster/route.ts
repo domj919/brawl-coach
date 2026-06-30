@@ -42,20 +42,26 @@ export async function GET(req: NextRequest) {
   const tag = req.nextUrl.searchParams.get("tag");
   if (!tag) return NextResponse.json({ error: "Missing tag parameter" }, { status: 400 });
 
-  const apiKey = process.env.BRAWLSTARS_API_KEY;
-  if (!apiKey) return NextResponse.json({ error: "API key not configured" }, { status: 500 });
-
-  // Tags may include # — encode it
   const encoded = encodeURIComponent(tag.startsWith("#") ? tag : `#${tag}`);
 
-  const res = await fetch(`${BS_BASE}/players/${encoded}`, {
-    headers: { Authorization: `Bearer ${apiKey}` },
-    cache: "no-store",
-  });
+  // Try RoyaleAPI proxy first (no auth header — proxy uses its own key)
+  let res = await fetch(`${BS_BASE}/players/${encoded}`, { cache: "no-store" });
+
+  // Fall back to official API with user key if proxy fails
+  if (!res.ok && res.status !== 404) {
+    const apiKey = process.env.BRAWLSTARS_API_KEY;
+    if (apiKey) {
+      res = await fetch(`https://api.brawlstars.com/v1/players/${encoded}`, {
+        headers: { Authorization: `Bearer ${apiKey}` },
+        cache: "no-store",
+      });
+    }
+  }
 
   if (!res.ok) {
     const body = await res.text();
-    return NextResponse.json({ error: `Brawl Stars API error ${res.status}`, detail: body }, { status: res.status });
+    const detail = (() => { try { return JSON.parse(body); } catch { return body; } })();
+    return NextResponse.json({ error: `Brawl Stars API error ${res.status}`, detail }, { status: res.status });
   }
 
   const player: BSPlayer = await res.json();
