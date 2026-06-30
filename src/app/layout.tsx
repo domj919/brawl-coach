@@ -45,14 +45,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <nav className="max-w-6xl mx-auto px-4 h-14 flex items-center gap-5 relative">
             <Link href="/" className="flex items-center gap-2 shrink-0">
               {/* Brawl Stars logo from Brawlify CDN */}
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src="https://cdn.brawlify.com/assets/png/logo.png"
                 alt="Brawl Stars"
                 width={28}
                 height={28}
                 className="object-contain"
-                unoptimized
-                onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
               />
               <span className="font-extrabold text-lg tracking-tight" style={{background: "linear-gradient(90deg, #FFD700, #FFA500)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent"}}>
                 Brawl Advisor
