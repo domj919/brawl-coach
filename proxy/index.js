@@ -11,10 +11,19 @@ if (!API_KEY) {
 }
 
 http.createServer((req, res) => {
-  // Health check
-  if (req.url === "/health") {
-    res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ ok: true }));
+  // Health + outbound IP check
+  if (req.url === "/health" || req.url === "/ip") {
+    https.get("https://api.ipify.org?format=json", (ipRes) => {
+      let data = "";
+      ipRes.on("data", (chunk) => data += chunk);
+      ipRes.on("end", () => {
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ ok: true, outboundIp: JSON.parse(data).ip }));
+      });
+    }).on("error", () => {
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ ok: true, outboundIp: "unknown" }));
+    });
     return;
   }
 
