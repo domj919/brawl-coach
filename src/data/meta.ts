@@ -1,33 +1,41 @@
 import type { BrawlerBase, MapMeta, MapMetaByName, Tier } from "@/types";
 
 // ─── Global tier list ────────────────────────────────────────────────────────
-// Season 51 — June 2026. Source: community consensus / grindnstrat.com
+// Season 51 — July 2026. Source: spenlc tier list + buffies update
 
 export const GLOBAL_TIERS_BY_NAME: Record<string, Tier> = {
-  // S
-  Colette: "S", Edgar: "S", Bolt: "S", Mortis: "S",
-  Chester: "S", Crow: "S", Colt: "S", Kit: "S",
+  // S — Current meta dominants (spenlc July 2026, post-buffies update)
+  Damian: "S", Colette: "S", Crow: "S", Lumi: "S",
+  Mina: "S", Otis: "S", Chester: "S", Pierce: "S",
+  Edgar: "S", Mortis: "S", Ruffs: "S",
+  "8-Bit": "S", Surge: "S", Meg: "S", Najia: "S",
   // A
-  "Starr Nova": "A", Pierce: "A", Otis: "A", Damian: "A", Griff: "A", Mina: "A",
+  Stu: "A", Shade: "A", Leon: "A", Kit: "A",
+  Charlie: "A", Finx: "A", Gene: "A", Angelo: "A",
+  Sirius: "A", Max: "A", Kaze: "A",
   // B
-  Bibi: "B", Najia: "B", Shade: "B", Cordelius: "B", Lumi: "B", Emz: "B",
-  Meeple: "B", Leon: "B", Fang: "B", Shelly: "B", Bull: "B", Charlie: "B",
-  Bea: "B", Buster: "B", Finx: "B", Alli: "B",
+  Colt: "B", Bull: "B", Griff: "B", Penny: "B", Lola: "B",
+  Brock: "B", Kenji: "B", "Jae-Yong": "B", Belle: "B",
+  Bibi: "B", "R-T": "B", Lily: "B", Rico: "B",
+  Cordelius: "B", Moe: "B", Poco: "B", "Starr Nova": "B",
+  Nani: "B", Fang: "B", Alli: "B",
   // C
-  Byron: "C", Spike: "C", Maisie: "C", Sandy: "C", Mandy: "C", Tara: "C",
-  Janet: "C", "Jae-Yong": "C", Stu: "C", Berry: "C", Bonnie: "C", Moe: "C",
-  Sam: "C", "R-T": "C", Piper: "C", Carl: "C", Penny: "C", Brock: "C", Rico: "C",
-  // D
-  Pam: "D", Buzz: "D", Bo: "D", Lily: "D", Meg: "D", Sirius: "D",
-  Willow: "D", Angelo: "D", Kaze: "D", Lola: "D", Gus: "D", Ziggy: "D",
-  Pearl: "D", Clancy: "D", Kenji: "D", Melodie: "D",
-  Lou: "D", Amber: "D", Ruffs: "D", Glowy: "D", Gene: "D", Gale: "D",
-  Draco: "D", Nani: "D", Barley: "D", "Mr. P": "D", Mico: "D", Trunk: "D",
-  Nita: "D", Juju: "D", Surge: "D", Squeak: "D", Max: "D", Gray: "D",
-  Frank: "D", Belle: "D", Ash: "D", Rosa: "D", Dynamike: "D", "El Primo": "D",
-  Darryl: "D", Tick: "D", Poco: "D", Eve: "D", "8-Bit": "D", Sprout: "D",
-  Gigi: "D", Ollie: "D", Doug: "D", Grom: "D", Chuck: "D", Hank: "D",
-  Jessie: "D", Jacky: "D", "Larry & Lawrie": "D",
+  Emz: "C", Sandy: "C", Buster: "C", Barley: "C",
+  Hank: "C", Gale: "C", Squeak: "C", Frank: "C",
+  Carl: "C", Buzz: "C", Willow: "C", Eve: "C",
+  Draco: "C", Clancy: "C", Melodie: "C", Gray: "C",
+  Ollie: "C", Trunk: "C", Amber: "C", Pearl: "C",
+  Ziggy: "C", Tick: "C", Bo: "C", Shelly: "C",
+  Byron: "C", Mandy: "C", Janet: "C", Berry: "C",
+  Bonnie: "C", Maisie: "C", Meeple: "C", Bea: "C",
+  // D — Weak / falling off / situational at best
+  Piper: "D", Spike: "D", Tara: "D", Sam: "D",
+  Pam: "D", Ash: "D", Rosa: "D", Dynamike: "D",
+  "El Primo": "D", Darryl: "D", Jessie: "D", Jacky: "D",
+  "Larry & Lawrie": "D", "Mr. P": "D", Gigi: "D",
+  Nita: "D", Doug: "D", Grom: "D", Chuck: "D",
+  Sprout: "D", Juju: "D", Gus: "D", Glowy: "D",
+  Lou: "D", Mico: "D",
 };
 
 export function getGlobalTier(name: string): Tier {
@@ -40,13 +48,13 @@ export function getGlobalTier(name: string): Tier {
 
 const GEM_GRAB_TEMPLATE = {
   tiers: {
-    // Meta S/A picks first, then mode specialists
-    Chester: "S", Crow: "S", Colette: "S", Mortis: "A", Edgar: "A", Colt: "A",
-    Sandy: "A", Tara: "A", Max: "A", Spike: "A", Gene: "A",
-    "Starr Nova": "B", Emz: "B", Buster: "B", Byron: "B", Poco: "B",
-    Barley: "B", Stu: "B", Surge: "B", Ruffs: "B", Gus: "B",
+    // S/A global brawlers that work in GG + mode specialists
+    Chester: "S", Crow: "S", Colette: "S",
+    Edgar: "A", Mortis: "A", Sandy: "A", Gene: "A", Kit: "A", Max: "A",
+    Lily: "B", Stu: "B", Emz: "B", Buster: "B", Byron: "B", Poco: "B",
+    Barley: "B", Ruffs: "B", "Starr Nova": "B", Spike: "B",
     Leon: "C", Bull: "C", Shelly: "C", Rico: "C", Nita: "C",
-    Piper: "D", Brock: "D", Bibi: "D",
+    Piper: "D", Brock: "D", Bibi: "D", Colt: "D",
   } as Record<string, Tier>,
   counters: {
     Gene:    ["Mortis", "Edgar", "Cordelius", "Charlie", "Leon"],
@@ -79,10 +87,10 @@ const GEM_GRAB_TEMPLATE = {
 
 const BRAWL_BALL_TEMPLATE = {
   tiers: {
-    // Meta picks dominate close-range BB
-    Mortis: "S", Edgar: "S", Chester: "S", Colt: "S", Damian: "S", Bibi: "S",
-    Bull: "A", Stu: "A", Fang: "A", Kit: "A", Colette: "A", Max: "A", Buster: "A",
-    Leon: "B", Shelly: "B", Sam: "B", Frank: "B", Crow: "B", Spike: "B",
+    // Post-buffies: Max and Meg are top BB picks; assassins dominate
+    Mortis: "S", Edgar: "S", Damian: "S", Max: "S", Meg: "S",
+    Colette: "A", Chester: "A", Colt: "A", Bibi: "A", Kit: "A", Stu: "A", Fang: "A",
+    Leon: "B", Bull: "B", Buster: "B", Surge: "B", Sam: "B", Frank: "B", Crow: "B", Spike: "B",
     Emz: "C", Sandy: "C", Bo: "C", Gene: "C", Poco: "C",
     Piper: "D", Brock: "D", Barley: "D",
   } as Record<string, Tier>,
@@ -117,10 +125,10 @@ const BRAWL_BALL_TEMPLATE = {
 
 const HEIST_TEMPLATE = {
   tiers: {
-    // Meta S/A picks + Heist specialists
-    Colt: "S", Colette: "S", Griff: "S", Chester: "S", Edgar: "A",
-    Rico: "A", Bull: "A", Brock: "A", Bibi: "A", Sam: "A",
-    Nita: "B", Jessie: "B", Surge: "B", Barley: "B", Penny: "B", Mortis: "B",
+    // 8-Bit and Surge are top 3 globally with buffies; Heist is their best mode
+    "8-Bit": "S", Surge: "S", Colette: "S",
+    Colt: "A", Chester: "A", Edgar: "A", Kaze: "A", Rico: "A", Bull: "A", Bibi: "A", Brock: "A",
+    Griff: "B", Nita: "B", Jessie: "B", Barley: "B", Penny: "B", Mortis: "B", Sam: "B",
     Spike: "C", "El Primo": "C", Dynamike: "C", Tick: "C",
     Piper: "D", Gene: "D", Sandy: "D", Crow: "D",
   } as Record<string, Tier>,
@@ -154,12 +162,12 @@ const HEIST_TEMPLATE = {
 
 const BOUNTY_TEMPLATE = {
   tiers: {
-    // Meta brawlers lead — mode specialists only if currently viable
-    Crow: "S", Chester: "S", Colt: "S", Colette: "A",
-    Piper: "A", Brock: "A", Leon: "A", Spike: "A", Tick: "A",
-    Bo: "B", Rico: "B", Carl: "B", Barley: "B", Nani: "B",
-    Mortis: "C", Edgar: "C", Stu: "C", Sandy: "C",
-    Belle: "C", Mandy: "C", Angelo: "C",
+    // Meta S-tiers lead; Colt is a Heist pick not Bounty; Mandy is F tier
+    Crow: "S", Chester: "S", Damian: "S",
+    Mina: "A", Mortis: "A", Leon: "A", Gene: "A", "Jae-Yong": "A", Colette: "A",
+    Piper: "A", Brock: "A", Belle: "A",
+    Nani: "B", Angelo: "B", Bo: "B", Rico: "B", Carl: "B", Barley: "B", Cordelius: "B", Spike: "B",
+    Stu: "C", Sandy: "C", Colt: "C", Tick: "C", Mandy: "C",
     Bull: "D", "El Primo": "D", Bibi: "D",
   } as Record<string, Tier>,
   counters: {
@@ -190,10 +198,11 @@ const BOUNTY_TEMPLATE = {
 
 const KNOCKOUT_TEMPLATE = {
   tiers: {
-    // Meta S/A picks dominate KO — weak snipers drop significantly
-    Chester: "S", Crow: "S", Damian: "A", Leon: "A", Colette: "A",
-    Piper: "B", Brock: "B", Spike: "B", Bo: "B", Tick: "B", Gray: "B", Colt: "B",
-    Carl: "C", Rico: "C", Barley: "C", Emz: "C", Belle: "C", Mandy: "C", Angelo: "C",
+    // Chester/Crow S; Damian/Mina excellent; Stu/Kit/Gene specifically strong in KO
+    Chester: "S", Crow: "S",
+    Damian: "A", Mina: "A", Stu: "A", Kit: "A", Leon: "A", Colette: "A", Gene: "A",
+    Piper: "B", Brock: "B", Spike: "B", Cordelius: "B", Belle: "B", Colt: "B", Angelo: "B",
+    Bo: "C", Gray: "C", Tick: "C", Carl: "C", Rico: "C", Barley: "C", Emz: "C", Mandy: "C",
     Bull: "D", "El Primo": "D", Bibi: "D", Mortis: "D",
   } as Record<string, Tier>,
   counters: {
@@ -227,10 +236,10 @@ const KNOCKOUT_TEMPLATE = {
 
 const HOT_ZONE_TEMPLATE = {
   tiers: {
-    // Meta picks + zone controllers
-    Colette: "S", Chester: "S", Emz: "S", Damian: "S", Sandy: "A",
-    "Larry & Lawrie": "A", Juju: "A", Pam: "A", Poco: "A",
-    Tara: "B", Buster: "B", Barley: "B", Spike: "B", Frank: "B", Ruffs: "B",
+    // Meg is S in HZ with buffies; Finx's best mode is HZ
+    Colette: "S", Damian: "S", Chester: "S", Meg: "S",
+    Sandy: "A", Emz: "A", Finx: "A", "Larry & Lawrie": "A", Juju: "A", Poco: "A",
+    Pam: "B", Draco: "B", Tara: "B", Buster: "B", Barley: "B", Spike: "B", Frank: "B", Ruffs: "B",
     Mortis: "C", Edgar: "C", Leon: "C", Bibi: "C", Sprout: "C", Gale: "C",
   } as Record<string, Tier>,
   counters: {
@@ -370,9 +379,9 @@ const MAP_OVERRIDES: Record<number, Partial<NamedMeta>> = {
   15000082: {
     tiers: { Brock: "B", Belle: "D", Bo: "C", Mandy: "D" },
   },
-  // Dry Season (15000083) — open desert
+  // Dry Season (15000083) — very open desert, long-range gets a small boost
   15000083: {
-    tiers: { Piper: "S", Mandy: "S", Angelo: "A" },
+    tiers: { Piper: "B", Belle: "A", Nani: "A" },
   },
 };
 
