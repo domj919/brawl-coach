@@ -12,7 +12,7 @@ export const GLOBAL_TIERS_BY_NAME: Record<string, Tier> = {
   // A
   Stu: "A", Shade: "A", Leon: "A", Kit: "A",
   Charlie: "A", Finx: "A", Gene: "A", Angelo: "A",
-  Sirius: "A", Max: "A", Kaze: "A",
+  Sirius: "A", Max: "A", Kaze: "A", Byron: "A", Melodie: "A",
   // B
   Colt: "B", Bull: "B", Griff: "B", Penny: "B", Lola: "B",
   Brock: "B", Kenji: "B", "Jae-Yong": "B", Belle: "B",
@@ -23,10 +23,10 @@ export const GLOBAL_TIERS_BY_NAME: Record<string, Tier> = {
   Emz: "C", Sandy: "C", Buster: "C", Barley: "C",
   Hank: "C", Gale: "C", Squeak: "C", Frank: "C",
   Carl: "C", Buzz: "C", Willow: "C", Eve: "C",
-  Draco: "C", Clancy: "C", Melodie: "C", Gray: "C",
+  Draco: "C", Clancy: "C", Gray: "C",
   Ollie: "C", Trunk: "C", Amber: "C", Pearl: "C",
   Ziggy: "C", Tick: "C", Bo: "C", Shelly: "C",
-  Byron: "C", Mandy: "C", Janet: "C", Berry: "C",
+  Mandy: "C", Janet: "C", Berry: "C",
   Bonnie: "C", Maisie: "C", Meeple: "C", Bea: "C",
   // D — Weak / falling off / situational at best
   Piper: "D", Spike: "D", Tara: "D", Sam: "D",
@@ -51,7 +51,7 @@ const GEM_GRAB_TEMPLATE = {
     // S/A global brawlers that work in GG + mode specialists
     Chester: "S", Crow: "S", Colette: "S",
     Edgar: "A", Mortis: "A", Sandy: "A", Gene: "A", Kit: "A", Max: "A",
-    Lily: "B", Stu: "B", Emz: "B", Buster: "B", Byron: "B", Poco: "B",
+    Lily: "B", Stu: "B", Emz: "B", Buster: "B", Poco: "B",
     Barley: "B", Ruffs: "B", "Starr Nova": "B", Spike: "B",
     Leon: "C", Bull: "C", Shelly: "C", Rico: "C", Nita: "C",
     Piper: "D", Brock: "D", Bibi: "D", Colt: "D",
@@ -127,7 +127,7 @@ const HEIST_TEMPLATE = {
   tiers: {
     // 8-Bit and Surge are top 3 globally with buffies; Heist is their best mode
     "8-Bit": "S", Surge: "S", Colette: "S",
-    Colt: "A", Chester: "A", Edgar: "A", Kaze: "A", Rico: "A", Bull: "A", Bibi: "A", Brock: "A",
+    Colt: "A", Chester: "A", Edgar: "A", Kaze: "A", Rico: "A", Bull: "A", Bibi: "A", Brock: "A", Melodie: "A",
     Griff: "B", Nita: "B", Jessie: "B", Barley: "B", Penny: "B", Mortis: "B", Sam: "B",
     Spike: "C", "El Primo": "C", Dynamike: "C", Tick: "C",
     Piper: "D", Gene: "D", Sandy: "D", Crow: "D",
@@ -166,6 +166,7 @@ const BOUNTY_TEMPLATE = {
     Crow: "S", Chester: "S", Damian: "S",
     Mina: "A", Mortis: "A", Leon: "A", Gene: "A", "Jae-Yong": "A", Colette: "A",
     Piper: "A", Brock: "A", Belle: "A",
+    Byron: "A",
     Nani: "B", Angelo: "B", Bo: "B", Rico: "B", Carl: "B", Barley: "B", Cordelius: "B", Spike: "B",
     Stu: "C", Sandy: "C", Colt: "C", Tick: "C", Mandy: "C",
     Bull: "D", "El Primo": "D", Bibi: "D",
@@ -200,7 +201,7 @@ const KNOCKOUT_TEMPLATE = {
   tiers: {
     // Chester/Crow S; Damian/Mina excellent; Stu/Kit/Gene specifically strong in KO
     Chester: "S", Crow: "S",
-    Damian: "A", Mina: "A", Stu: "A", Kit: "A", Leon: "A", Colette: "A", Gene: "A",
+    Damian: "A", Mina: "A", Stu: "A", Kit: "A", Leon: "A", Colette: "A", Gene: "A", Byron: "A",
     Piper: "B", Brock: "B", Spike: "B", Cordelius: "B", Belle: "B", Colt: "B", Angelo: "B",
     Bo: "C", Gray: "C", Tick: "C", Carl: "C", Rico: "C", Barley: "C", Emz: "C", Mandy: "C",
     Bull: "D", "El Primo": "D", Bibi: "D", Mortis: "D",
