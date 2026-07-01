@@ -14,7 +14,7 @@ export const GLOBAL_TIERS_BY_NAME: Record<string, Tier> = {
   Charlie: "A", Finx: "A", Gene: "A", Angelo: "A",
   Sirius: "A", Max: "A", Kaze: "A", Byron: "A", Melodie: "A",
   // B
-  Colt: "B", Bull: "B", Griff: "B", Penny: "B", Lola: "B",
+  Colt: "B", Bull: "B", Griff: "B", Penny: "B", Lola: "B", Gus: "B",
   Brock: "B", Kenji: "B", "Jae-Yong": "B", Belle: "B",
   Bibi: "B", "R-T": "B", Lily: "B", Rico: "B",
   Cordelius: "B", Moe: "B", Poco: "B", "Starr Nova": "B",
@@ -34,7 +34,7 @@ export const GLOBAL_TIERS_BY_NAME: Record<string, Tier> = {
   "El Primo": "D", Darryl: "D", Jessie: "D", Jacky: "D",
   "Larry & Lawrie": "D", "Mr. P": "D", Gigi: "D",
   Nita: "D", Doug: "D", Grom: "D", Chuck: "D",
-  Sprout: "D", Juju: "D", Gus: "D", Glowy: "D",
+  Sprout: "D", Juju: "D", Glowy: "D",
   Lou: "D", Mico: "D",
 };
 
@@ -167,7 +167,7 @@ const BOUNTY_TEMPLATE = {
     Mina: "A", Mortis: "A", Leon: "A", Gene: "A", "Jae-Yong": "A", Colette: "A",
     Piper: "A", Brock: "A", Belle: "A",
     Byron: "A",
-    Nani: "B", Angelo: "B", Bo: "B", Rico: "B", Carl: "B", Barley: "B", Cordelius: "B", Spike: "B",
+    Nani: "B", Angelo: "B", Gus: "B", Bo: "B", Rico: "B", Carl: "B", Barley: "B", Cordelius: "B", Spike: "B",
     Stu: "C", Sandy: "C", Colt: "C", Tick: "C", Mandy: "C",
     Bull: "D", "El Primo": "D", Bibi: "D",
   } as Record<string, Tier>,
