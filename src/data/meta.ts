@@ -150,42 +150,44 @@ const HEIST_TEMPLATE = {
 
 const BOUNTY_TEMPLATE = {
   tiers: {
-    Piper: "S", Brock: "S", Belle: "S", Crow: "S", Colt: "S", Bo: "S", Tick: "A",
-    Angelo: "A", Mandy: "A", Leon: "A", Spike: "A", Chester: "A",
-    Barley: "B", Rico: "B", Carl: "B", Nani: "B",
-    Mortis: "C", Edgar: "C", Stu: "C", Sandy: "C",
+    // Long-range damage dealers dominate Bounty
+    Piper: "S", Brock: "S", Belle: "S", Mandy: "S", Angelo: "S",
+    Crow: "A", Leon: "A", Spike: "A", Chester: "A", Tick: "A", Nani: "A",
+    Bo: "B", Rico: "B", Carl: "B", Barley: "B",
+    Mortis: "C", Edgar: "C", Stu: "C", Sandy: "C", Colt: "C",
     Bull: "D", "El Primo": "D", Bibi: "D",
   } as Record<string, Tier>,
   counters: {
     Piper:   ["Mortis", "Edgar", "Stu", "Leon", "Cordelius"],
     Brock:   ["Mortis", "Edgar", "Stu", "Leon"],
     Belle:   ["Mortis", "Edgar", "Stu", "Leon", "Cordelius"],
-    Crow:    ["Mortis", "Shelly", "Bull", "Buster"],
-    Colt:    ["Bull", "Frank", "El Primo"],
-    Bo:      ["Leon", "Mortis", "Edgar"],
-    Angelo:  ["Mortis", "Edgar", "Stu", "Leon"],
     Mandy:   ["Mortis", "Edgar", "Stu", "Leon"],
+    Angelo:  ["Mortis", "Edgar", "Stu", "Leon"],
+    Crow:    ["Mortis", "Shelly", "Bull", "Buster"],
+    Bo:      ["Leon", "Mortis", "Edgar"],
     Leon:    ["Buster", "Crow", "Tara"],
     Tick:    ["Mortis", "Edgar", "Stu"],
     Chester: ["Crow", "Spike"],
     Spike:   ["Leon", "Mortis", "Edgar"],
+    Colt:    ["Piper", "Mandy", "Angelo", "Belle"],
   } as Record<string, string[]>,
   synergies: {
-    Ruffs:   ["Piper", "Brock", "Belle", "Crow", "Bo", "Colt", "Angelo"],
-    Bo:      ["Piper", "Brock", "Belle", "Colt"],
-    Gene:    ["Piper", "Belle", "Colt", "Brock"],
-    Piper:   ["Ruffs", "Bo", "Belle"],
-    Brock:   ["Ruffs", "Bo", "Piper"],
-    Belle:   ["Ruffs", "Bo", "Piper"],
-    Colt:    ["Ruffs", "Bo"],
+    Ruffs:   ["Piper", "Brock", "Belle", "Mandy", "Angelo", "Crow"],
+    Bo:      ["Piper", "Brock", "Belle", "Mandy"],
+    Gene:    ["Piper", "Belle", "Mandy", "Brock"],
+    Piper:   ["Ruffs", "Bo", "Belle", "Mandy"],
+    Brock:   ["Ruffs", "Bo", "Piper", "Mandy"],
+    Belle:   ["Ruffs", "Bo", "Piper", "Mandy"],
+    Mandy:   ["Ruffs", "Bo", "Piper", "Belle"],
+    Angelo:  ["Ruffs", "Piper", "Belle"],
   } as Record<string, string[]>,
 };
 
 const KNOCKOUT_TEMPLATE = {
   tiers: {
-    Piper: "S", Belle: "S", Brock: "S", Crow: "S", Leon: "S", Colt: "S",
+    Piper: "S", Belle: "S", Brock: "S", Crow: "S", Leon: "S",
     Chester: "S", Damian: "A", Angelo: "A", Mandy: "A", Spike: "A", Bo: "A",
-    Gray: "A", Tick: "A",
+    Gray: "A", Tick: "A", Colt: "B",
     Carl: "B", Rico: "B", Barley: "B", Emz: "B",
     Bull: "C", "El Primo": "C", Bibi: "C", Mortis: "C",
   } as Record<string, Tier>,
@@ -350,17 +352,17 @@ const MAP_OVERRIDES: Record<number, Partial<NamedMeta>> = {
   },
 
   // ── Bounty ───────────────────────────────────────────────────────────────
-  // Shooting Star (15000005) — very open
+  // Shooting Star (15000005) — very open, snipers only
   15000005: {
-    tiers: { Piper: "S", Brock: "S", Belle: "S" },
+    tiers: { Piper: "S", Brock: "S", Belle: "S", Mandy: "S", Angelo: "S", Bo: "C", Colt: "D" },
   },
   // Hideout (15000022) — bushy flanks
   15000022: {
     tiers: { Leon: "S", Crow: "S", Sandy: "A" },
   },
-  // Layer Cake (15000082) — layered platforms
+  // Layer Cake (15000082) — layered platforms, mid-range more viable
   15000082: {
-    tiers: { Brock: "S", Belle: "S", Bo: "S" },
+    tiers: { Brock: "S", Belle: "S", Bo: "A", Mandy: "S" },
   },
   // Dry Season (15000083) — open desert
   15000083: {
