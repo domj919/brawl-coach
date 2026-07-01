@@ -40,11 +40,13 @@ export function getGlobalTier(name: string): Tier {
 
 const GEM_GRAB_TEMPLATE = {
   tiers: {
-    Gene: "S", Sandy: "S", Tara: "S", Max: "S", Spike: "S", Poco: "A",
-    Chester: "S", Colette: "A", "Starr Nova": "A", Crow: "A", Emz: "A",
-    Byron: "A", Buster: "A", Ruffs: "B", Barley: "B", Carl: "B", Brock: "B",
-    Rico: "B", Stu: "B", Surge: "B", Nita: "B", Gus: "B", Mortis: "C",
-    Edgar: "C", Leon: "C", Shelly: "C", Bull: "C", Bibi: "C", Piper: "D",
+    // Meta S/A picks first, then mode specialists
+    Chester: "S", Crow: "S", Colette: "S", Mortis: "A", Edgar: "A", Colt: "A",
+    Sandy: "A", Tara: "A", Max: "A", Spike: "A", Gene: "A",
+    "Starr Nova": "B", Emz: "B", Buster: "B", Byron: "B", Poco: "B",
+    Barley: "B", Stu: "B", Surge: "B", Ruffs: "B", Gus: "B",
+    Leon: "C", Bull: "C", Shelly: "C", Rico: "C", Nita: "C",
+    Piper: "D", Brock: "D", Bibi: "D",
   } as Record<string, Tier>,
   counters: {
     Gene:    ["Mortis", "Edgar", "Cordelius", "Charlie", "Leon"],
@@ -77,11 +79,12 @@ const GEM_GRAB_TEMPLATE = {
 
 const BRAWL_BALL_TEMPLATE = {
   tiers: {
-    Bibi: "S", Mortis: "S", Stu: "S", Edgar: "S", Bull: "S", Fang: "S",
-    Damian: "S", Chester: "S", Colt: "A", Max: "A", Buster: "A", Leon: "A",
-    Shelly: "A", Sam: "A", Frank: "A", Colette: "A", Kit: "A",
-    Crow: "B", Spike: "B", Emz: "B", Sandy: "B", Bo: "B",
-    Piper: "C", Brock: "C", Gene: "C", Poco: "C", Barley: "D",
+    // Meta picks dominate close-range BB
+    Mortis: "S", Edgar: "S", Chester: "S", Colt: "S", Damian: "S", Bibi: "S",
+    Bull: "A", Stu: "A", Fang: "A", Kit: "A", Colette: "A", Max: "A", Buster: "A",
+    Leon: "B", Shelly: "B", Sam: "B", Frank: "B", Crow: "B", Spike: "B",
+    Emz: "C", Sandy: "C", Bo: "C", Gene: "C", Poco: "C",
+    Piper: "D", Brock: "D", Barley: "D",
   } as Record<string, Tier>,
   counters: {
     Bibi:    ["Colt", "Frank", "Chester", "Mortis"],
@@ -114,11 +117,12 @@ const BRAWL_BALL_TEMPLATE = {
 
 const HEIST_TEMPLATE = {
   tiers: {
-    Colt: "S", Colette: "S", Rico: "S", Bull: "S", Brock: "S", Griff: "S",
-    Nita: "A", Jessie: "A", Bibi: "A", Edgar: "A", Surge: "A", Sam: "A",
-    Barley: "A", Penny: "A", Chester: "A",
-    Mortis: "B", Spike: "B", "El Primo": "B", Dynamike: "B", Tick: "B",
-    Piper: "C", Gene: "C", Sandy: "C", Emz: "C", Crow: "C",
+    // Meta S/A picks + Heist specialists
+    Colt: "S", Colette: "S", Griff: "S", Chester: "S", Edgar: "A",
+    Rico: "A", Bull: "A", Brock: "A", Bibi: "A", Sam: "A",
+    Nita: "B", Jessie: "B", Surge: "B", Barley: "B", Penny: "B", Mortis: "B",
+    Spike: "C", "El Primo": "C", Dynamike: "C", Tick: "C",
+    Piper: "D", Gene: "D", Sandy: "D", Crow: "D",
   } as Record<string, Tier>,
   counters: {
     Colt:    ["Bull", "Frank", "El Primo", "Bibi", "Darryl"],
@@ -150,11 +154,12 @@ const HEIST_TEMPLATE = {
 
 const BOUNTY_TEMPLATE = {
   tiers: {
-    // Long-range damage dealers dominate Bounty
-    Piper: "S", Brock: "S", Belle: "S", Mandy: "S", Angelo: "S",
-    Crow: "A", Leon: "A", Spike: "A", Chester: "A", Tick: "A", Nani: "A",
-    Bo: "B", Rico: "B", Carl: "B", Barley: "B",
-    Mortis: "C", Edgar: "C", Stu: "C", Sandy: "C", Colt: "C",
+    // Meta brawlers lead — mode specialists only if currently viable
+    Crow: "S", Chester: "S", Colt: "S", Colette: "A",
+    Piper: "A", Brock: "A", Leon: "A", Spike: "A", Tick: "A",
+    Bo: "B", Rico: "B", Carl: "B", Barley: "B", Nani: "B",
+    Mortis: "C", Edgar: "C", Stu: "C", Sandy: "C",
+    Belle: "C", Mandy: "C", Angelo: "C",
     Bull: "D", "El Primo": "D", Bibi: "D",
   } as Record<string, Tier>,
   counters: {
@@ -185,11 +190,11 @@ const BOUNTY_TEMPLATE = {
 
 const KNOCKOUT_TEMPLATE = {
   tiers: {
-    Piper: "S", Belle: "S", Brock: "S", Crow: "S", Leon: "S",
-    Chester: "S", Damian: "A", Angelo: "A", Mandy: "A", Spike: "A", Bo: "A",
-    Gray: "A", Tick: "A", Colt: "B",
-    Carl: "B", Rico: "B", Barley: "B", Emz: "B",
-    Bull: "C", "El Primo": "C", Bibi: "C", Mortis: "C",
+    // Meta S/A picks dominate KO — weak snipers drop significantly
+    Chester: "S", Crow: "S", Damian: "A", Leon: "A", Colette: "A",
+    Piper: "B", Brock: "B", Spike: "B", Bo: "B", Tick: "B", Gray: "B", Colt: "B",
+    Carl: "C", Rico: "C", Barley: "C", Emz: "C", Belle: "C", Mandy: "C", Angelo: "C",
+    Bull: "D", "El Primo": "D", Bibi: "D", Mortis: "D",
   } as Record<string, Tier>,
   counters: {
     Piper:   ["Mortis", "Edgar", "Stu", "Leon", "Cordelius"],
@@ -222,10 +227,11 @@ const KNOCKOUT_TEMPLATE = {
 
 const HOT_ZONE_TEMPLATE = {
   tiers: {
-    Emz: "S", Sandy: "S", "Larry & Lawrie": "S", Damian: "S", Juju: "S", Pam: "S",
-    Poco: "A", Ruffs: "A", Barley: "A", Spike: "A", Sprout: "A", Frank: "A",
-    Tara: "B", Buster: "B", Colette: "B", Gale: "B",
-    Mortis: "C", Edgar: "C", Leon: "C", Bibi: "C",
+    // Meta picks + zone controllers
+    Colette: "S", Chester: "S", Emz: "S", Damian: "S", Sandy: "A",
+    "Larry & Lawrie": "A", Juju: "A", Pam: "A", Poco: "A",
+    Tara: "B", Buster: "B", Barley: "B", Spike: "B", Frank: "B", Ruffs: "B",
+    Mortis: "C", Edgar: "C", Leon: "C", Bibi: "C", Sprout: "C", Gale: "C",
   } as Record<string, Tier>,
   counters: {
     Emz:             ["Mortis", "Edgar", "Leon", "Stu"],
@@ -352,17 +358,17 @@ const MAP_OVERRIDES: Record<number, Partial<NamedMeta>> = {
   },
 
   // ── Bounty ───────────────────────────────────────────────────────────────
-  // Shooting Star (15000005) — very open, snipers only
+  // Shooting Star (15000005) — very open, long range matters but meta picks still lead
   15000005: {
-    tiers: { Piper: "S", Brock: "S", Belle: "S", Mandy: "S", Angelo: "S", Bo: "C", Colt: "D" },
+    tiers: { Crow: "S", Chester: "S", Piper: "A", Brock: "A", Colt: "B", Bo: "D", Mandy: "D", Angelo: "D" },
   },
   // Hideout (15000022) — bushy flanks
   15000022: {
     tiers: { Leon: "S", Crow: "S", Sandy: "A" },
   },
-  // Layer Cake (15000082) — layered platforms, mid-range more viable
+  // Layer Cake (15000082) — layered platforms
   15000082: {
-    tiers: { Brock: "S", Belle: "S", Bo: "A", Mandy: "S" },
+    tiers: { Brock: "B", Belle: "D", Bo: "C", Mandy: "D" },
   },
   // Dry Season (15000083) — open desert
   15000083: {
